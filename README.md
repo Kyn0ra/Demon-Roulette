@@ -1,5 +1,5 @@
 <img width="1001" height="837" alt="logo" src="https://github.com/user-attachments/assets/ee2a9a3f-7a52-44a4-9a20-b8565dbc17b6" />
-# Demon Roulette
+ Demon Roulette
 
 Spin the wheel. Face your fate.
 
