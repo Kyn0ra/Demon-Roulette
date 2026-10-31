@@ -1,4 +1,4 @@
-<img width="103" height="103" alt="logo" src="https://github.com/user-attachments/assets/171a1bf5-fd39-4726-acd9-ba1569266952" />
+<img width="1138" height="904" alt="Screenshot 2026-10-31 221721" src="https://github.com/user-attachments/assets/01b26a33-6310-47e9-8ba5-4a91cb497cc6" />
 
  Demon Roulette
 
