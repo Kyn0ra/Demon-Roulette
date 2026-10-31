@@ -1,37 +1,23 @@
-<img width="1138" height="904" alt="Screenshot 2026-10-31 221721" src="https://github.com/user-attachments/assets/01b26a33-6310-47e9-8ba5-4a91cb497cc6" />
+# DemonRoulette
+This is where she makes a mod.
 
- Demon Roulette
+<img src="logo.png" width="150" alt="the mod's logo" />
 
-Spin the wheel. Face your fate.
+*Update logo.png to change your mod's icon (please)*
 
-**Demon Roulette** is a Geometry Dash mod that randomly selects a Demon difficulty for you to challenge!
+## Getting started
+We recommend heading over to [the getting started section on our docs](https://docs.geode-sdk.org/getting-started/) for useful info on what to do next.
 
-Whether you're warming up with an Easy Demon or taking on an Extreme Demon, let the wheel decide your next challenge.
+## Build instructions
+For more info, see [our docs](https://docs.geode-sdk.org/getting-started/create-mod#build)
+```sh
+# Assuming you have the Geode CLI set up already
+geode build
+```
 
-## Features
-
-- 🎡 Spin a roulette wheel to select a Demon challenge
-- Easy Demon challenges
-- Medium Demon challenges
-- Hard Demon challenges
-- Insane Demon challenges
-- Extreme Demon challenges
-- Settings
-- Filters
-- History
-- Stats
-## How to Play
-
-1. Open Geometry Dash with Geode installed.
-2. Open Demon Roulette.
-3. Spin the wheel.
-4. See which Demon difficulty gets selected.
-5. Take on the challenge!
-
-## Installation
-
-Download Demon Roulette through the Geode mod index once it is published.
-
-## Credits
-
-Created by Kynora
+# Resources
+* [Geode SDK Documentation](https://docs.geode-sdk.org/)
+* [Geode SDK Source Code](https://github.com/geode-sdk/geode/)
+* [Geode CLI](https://github.com/geode-sdk/cli)
+* [Bindings](https://github.com/geode-sdk/bindings/)
+* [Dev Tools](https://github.com/geode-sdk/DevTools)

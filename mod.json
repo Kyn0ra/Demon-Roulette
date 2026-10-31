@@ -1,0 +1,43 @@
+{
+	"geode": "5.11.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "kynora.demon-roulette",
+	"name": "Demon Roulette",
+	"version": "v1.5.0",
+	"developer": "Kynora",
+"description": "Spin the roulette and get a random demon to challenge.",
+"settings": {
+  "auto-open": {
+			"type": "bool",
+			"name": "Auto open level",
+			"description": "Go straight to the level after the wheel lands, instead of showing Open and Reroll.",
+			"default": false
+		},
+		"sounds": {
+			"type": "bool",
+			"name": "Sound effects",
+			"description": "Play sounds while the wheel spins.",
+			"default": true
+		},
+		"screen-shake": {
+			"type": "bool",
+			"name": "Screen shake",
+			"description": "Shake the popup when the wheel lands.",
+			"default": true
+		},
+		"white-flash": {
+			"type": "bool",
+			"name": "White flash",
+			"description": "Flash the popup when the wheel lands.",
+			"default": true
+		}
+	},
+	"dependencies": {
+		"geode.node-ids": ">=v1.23.3"
+	}
+}
