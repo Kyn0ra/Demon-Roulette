@@ -1,2 +1,32 @@
-# Demon-Roulette
-A Geometry Dash mod that spins a random Demon difficulty for you to challenge! From Easy Demons to Extreme Demons, let the wheel decide your next challenge.
+# Demon Roulette
+
+Spin the wheel. Face your fate.
+
+**Demon Roulette** is a Geometry Dash mod that randomly selects a Demon difficulty for you to challenge!
+
+Whether you're warming up with an Easy Demon or taking on an Extreme Demon, let the wheel decide your next challenge.
+
+## Features
+
+- 🎡 Spin a roulette wheel to select a Demon challenge
+- Easy Demon challenges
+- Medium Demon challenges
+- Hard Demon challenges
+- Insane Demon challenges
+- Extreme Demon challenges
+
+## How to Play
+
+1. Open Geometry Dash with Geode installed.
+2. Open Demon Roulette.
+3. Spin the wheel.
+4. See which Demon difficulty gets selected.
+5. Take on the challenge!
+
+## Installation
+
+Download Demon Roulette through the Geode mod index once it is published.
+
+## Credits
+
+Created by Kynora
