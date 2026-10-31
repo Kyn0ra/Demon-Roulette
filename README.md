@@ -16,7 +16,10 @@ Whether you're warming up with an Easy Demon or taking on an Extreme Demon, let 
 - Hard Demon challenges
 - Insane Demon challenges
 - Extreme Demon challenges
-
+- Settings
+- Filters
+- History
+- Stats
 ## How to Play
 
 1. Open Geometry Dash with Geode installed.
