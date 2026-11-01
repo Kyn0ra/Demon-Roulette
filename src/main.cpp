@@ -41,7 +41,6 @@ static constexpr float kPi = 3.14159265f;
 static constexpr float kWheelY = 112.f;
 static constexpr float kWheelR = 40.f;
 
-// Plays one of Geometry Dash's built-in sound effects (if sounds are enabled)
 static void playSfx(const char* name, float volume = 1.f, float speed = 1.f) {
     if (!Mod::get()->getSettingValue<bool>("sounds")) return;
     FMODAudioEngine::sharedEngine()->playEffect(name, speed, 0.f, volume);
@@ -57,8 +56,6 @@ static void drawCircle(CCDrawNode* node, CCPoint c, float r, ccColor4F fill) {
     node->drawPolygon(pts.data(), static_cast<unsigned int>(pts.size()), fill, 0.f, fill);
 }
 
-// ======================= Stats and streak =======================
-// A number that goes up by 1 every day (uses your local date)
 static int todayNumber() {
     std::time_t now = std::time(nullptr);
     std::tm tmv{};
@@ -94,7 +91,6 @@ static void recordSpin() {
     mod->setSavedValue<int>("stat-spins", mod->getSavedValue<int>("stat-spins") + 1);
 }
 
-// Called when you open a demon from the roulette
 static void recordOpen() {
     auto mod = Mod::get();
     mod->setSavedValue<int>("stat-opened", mod->getSavedValue<int>("stat-opened") + 1);
@@ -119,7 +115,6 @@ static void recordOpen() {
     mod->setSavedValue<int>("streak-last-day", today);
 }
 
-// ======================= Stats popup =======================
 class StatsPopup : public Popup {
 protected:
     bool init() {
@@ -157,7 +152,6 @@ public:
     }
 };
 
-// ======================= Filters popup =======================
 class FiltersPopup : public Popup {
 protected:
     bool init() {
@@ -208,7 +202,6 @@ public:
     }
 };
 
-// ======================= History popup =======================
 class HistoryPopup : public Popup {
 protected:
     bool init() {
@@ -276,8 +269,6 @@ protected:
         Mod::get()->setSavedValue<std::vector<std::string>>("history-names", std::vector<std::string>{});
         this->onClose(nullptr);
     }
-
-    // Lets the roulette give you levels it already gave you before
     void onResetSeen(CCObject*) {
         Mod::get()->setSavedValue<std::vector<int>>("seen-levels", std::vector<int>{});
         this->onClose(nullptr);
@@ -294,8 +285,6 @@ public:
         return nullptr;
     }
 };
-
-// ======================= Main roulette popup =======================
 struct HoverItem {
     CCMenuItemSpriteExtra* btn;
     CCNode* visual;
@@ -337,8 +326,6 @@ protected:
         auto menu = CCMenu::create();
         menu->setPosition({ 0.f, 0.f });
         m_mainLayer->addChild(menu, 6);
-
-        // Difficulty row
         for (int i = 0; i < 6; i++) {
             float x = m_size.width / 2 + (i - 2.5f) * 48.f;
 
@@ -358,8 +345,6 @@ protected:
             lbl->setPosition({ x, 211.f });
             m_mainLayer->addChild(lbl);
         }
-
-        // Length row
         for (int i = 0; i < 5; i++) {
             float x = m_size.width / 2 + (i - 2.f) * 62.f;
 
@@ -375,8 +360,6 @@ protected:
             m_items.push_back({ btn, lbl, 0.36f, false });
         }
         this->updateSelection();
-
-        // Side buttons: Filters, History (left) and Stats, Settings (right)
         auto addSide = [&](const char* text, float x, float y, SEL_MenuHandler cb) {
             auto spr = ButtonSprite::create(text);
             spr->setScale(0.55f);
@@ -389,7 +372,6 @@ protected:
         addSide("Stats", 298.f, 137.f, menu_selector(RoulettePopup::onStats));
         addSide("Settings", 298.f, 107.f, menu_selector(RoulettePopup::onSettings));
 
-        // Streak counter (right side)
         m_streakLabel = CCLabelBMFont::create("", "goldFont.fnt");
         m_streakLabel->setScale(0.45f);
         m_streakLabel->setPosition({ 298.f, 80.f });
@@ -397,8 +379,6 @@ protected:
         this->updateStreakLabel();
 
         CCPoint center = { m_size.width / 2, kWheelY };
-
-        // ----- Rim with chasing lights (does not rotate) -----
         m_rim = CCNode::create();
         m_rim->setPosition(center);
         m_rim->setScale(0.f);
@@ -427,8 +407,6 @@ protected:
                 nullptr
             ));
         }
-
-        // ----- The wheel -----
         m_wheel = CCNode::create();
         m_wheel->setPosition(center);
         m_wheel->setScale(0.f);
@@ -457,15 +435,11 @@ protected:
             m_wheel->addChild(s);
             m_wheelFaces.push_back(s);
         }
-
-        // Pointer at the top of the wheel
         m_pointer = CCDrawNode::create();
         CCPoint tri[3] = { { -7.f, 13.f }, { 7.f, 13.f }, { 0.f, -3.f } };
         m_pointer->drawPolygon(tri, 3, ccc4f(1.f, 0.25f, 0.25f, 1.f), 1.f, ccc4f(1.f, 1.f, 1.f, 1.f));
         m_pointer->setPosition({ center.x, center.y + 50.f });
         m_mainLayer->addChild(m_pointer, 4);
-
-        // Burst faces (hidden until a result lands)
         for (int i = 0; i < 10; i++) {
             auto s = CCSprite::createWithSpriteFrameName(kFrames[i % 6]);
             s->setScale(0.4f);
@@ -474,8 +448,6 @@ protected:
             m_mainLayer->addChild(s, 5);
             m_burst.push_back(s);
         }
-
-        // Wheel and rim pop in
         m_rim->runAction(CCSequence::create(
             CCDelayTime::create(0.2f),
             CCEaseBackOut::create(CCScaleTo::create(0.45f, 1.f)),
@@ -487,14 +459,10 @@ protected:
             nullptr
         ));
         this->startIdleAnimation();
-
-        // Result text
         m_resultLabel = CCLabelBMFont::create("Press Spin!", "bigFont.fnt");
         m_resultLabel->setScale(0.5f);
         m_resultLabel->setPosition({ m_size.width / 2, 54.f });
         m_mainLayer->addChild(m_resultLabel, 3);
-
-        // Spin button
         m_spinSpr = ButtonSprite::create("Spin");
         m_spinBtn = CCMenuItemSpriteExtra::create(
             m_spinSpr,
@@ -504,8 +472,6 @@ protected:
         m_spinBtn->setPosition({ m_size.width / 2, 25.f });
         menu->addChild(m_spinBtn);
         this->pulseSpinButton();
-
-        // Open / Reroll buttons (hidden until a result lands)
         m_choiceMenu = CCMenu::create();
         m_choiceMenu->setPosition({ 0.f, 0.f });
         m_choiceMenu->setVisible(false);
@@ -526,8 +492,6 @@ protected:
         );
         m_rerollBtn->setPosition({ m_size.width / 2 + 60.f, 25.f });
         m_choiceMenu->addChild(m_rerollBtn);
-
-        // White flash layer (invisible until a result lands)
         m_flash = CCLayerColor::create({ 255, 255, 255, 0 }, m_size.width - 12.f, m_size.height - 12.f);
         m_flash->setPosition({ 6.f, 6.f });
         m_mainLayer->addChild(m_flash, 10);
@@ -541,8 +505,6 @@ protected:
     void updateStreakLabel() {
         m_streakLabel->setString(fmt::format("Streak: {}", currentStreak()).c_str());
     }
-
-    // ----- side buttons -----
     void onFilters(CCObject*) {
         if (m_loading) return;
         FiltersPopup::create()->show();
@@ -588,8 +550,6 @@ protected:
         this->updateSelection();
         this->bounceItem(6 + tag);
     }
-
-    // ----- hover and click animations -----
     void animateItemTo(CCNode* node, float scale) {
         node->stopActionByTag(77);
         auto act = CCEaseSineOut::create(CCScaleTo::create(0.12f, scale));
@@ -623,7 +583,6 @@ protected:
         }
     }
 
-    // ----- wheel: keeps faces upright, flicks the pointer and ticks -----
     void wheelTick(float) {
         float rot = std::fmod(m_wheel->getRotation(), 360.f);
         if (rot < 0.f) rot += 360.f;
@@ -647,8 +606,6 @@ protected:
             }
         }
     }
-
-    // ----- spin button animations -----
     void pulseSpinButton() {
         m_spinSpr->stopAllActions();
         m_spinSpr->setRotation(0.f);
@@ -669,8 +626,6 @@ protected:
             nullptr
         )));
     }
-
-    // ----- wheel animations -----
     void startIdleAnimation() {
         m_wheel->stopAllActions();
         m_wheel->runAction(CCScaleTo::create(0.2f, 1.f));
@@ -679,7 +634,6 @@ protected:
 
     void startSpinAnimation() {
         m_wheel->stopAllActions();
-        // Squish, then pop bigger and whip around fast
         m_wheel->runAction(CCSequence::create(
             CCEaseSineOut::create(CCScaleTo::create(0.1f, 0.88f)),
             CCEaseBackOut::create(CCScaleTo::create(0.25f, 1.06f)),
@@ -689,7 +643,6 @@ protected:
     }
 
     void playReveal() {
-        // Slow down like a real roulette wheel and land on the chosen difficulty
         m_wheel->stopAllActions();
 
         float cur = std::fmod(m_wheel->getRotation(), 360.f);
@@ -706,10 +659,8 @@ protected:
     }
 
     void showResult() {
-        // Win sound
         playSfx("achievement_01.ogg", 0.9f);
 
-        // The winning face pops
         auto win = m_wheelFaces[m_selected];
         win->runAction(CCSequence::create(
             CCEaseBackOut::create(CCScaleTo::create(0.25f, 0.85f)),
@@ -726,8 +677,6 @@ protected:
             CCEaseBackOut::create(CCScaleTo::create(0.3f, 1.f)),
             nullptr
         ));
-
-        // Screen shake (can be turned off in settings)
         if (Mod::get()->getSettingValue<bool>("screen-shake")) {
             m_mainLayer->runAction(CCSequence::create(
                 CCMoveBy::create(0.04f, { 6.f, 0.f }),
@@ -737,8 +686,6 @@ protected:
                 nullptr
             ));
         }
-
-        // White flash (can be turned off in settings)
         if (Mod::get()->getSettingValue<bool>("white-flash")) {
             m_flash->stopAllActions();
             m_flash->runAction(CCSequence::create(
@@ -747,8 +694,6 @@ protected:
                 nullptr
             ));
         }
-
-        // Burst of mini faces
         for (int i = 0; i < static_cast<int>(m_burst.size()); i++) {
             auto s = m_burst[i];
             float a = i * (kPi * 2.f / m_burst.size());
@@ -778,14 +723,12 @@ protected:
         m_resultLabel->runAction(CCFadeIn::create(0.4f));
 
         if (Mod::get()->getSettingValue<bool>("auto-open")) {
-            // Go straight to the level
             this->runAction(CCSequence::create(
                 CCDelayTime::create(1.6f),
                 CCCallFunc::create(this, callfunc_selector(RoulettePopup::onOpenAuto)),
                 nullptr
             ));
         } else {
-            // Show Open / Reroll after a short moment
             this->runAction(CCSequence::create(
                 CCDelayTime::create(0.9f),
                 CCCallFunc::create(this, callfunc_selector(RoulettePopup::showChoices)),
@@ -793,8 +736,6 @@ protected:
             ));
         }
     }
-
-    // ----- open / reroll -----
     void showChoices() {
         m_loading = false;
         m_spinBtn->setVisible(false);
@@ -824,7 +765,6 @@ protected:
         this->onSpin(nullptr);
     }
 
-    // ----- searching -----
     void onSpin(CCObject*) {
         if (m_loading) return;
         m_loading = true;
@@ -845,11 +785,8 @@ protected:
         search->m_uncompletedFilter = true;
 
         if (m_selectedLen >= 0) {
-            // +1 because Tiny (length 0) was removed from the buttons
             search->m_length = std::to_string(m_selectedLen + 1);
         }
-
-        // Filters from the Filters popup
         if (Mod::get()->getSavedValue<bool>("filter-rated")) search->m_starFilter = true;
         if (Mod::get()->getSavedValue<bool>("filter-featured")) search->m_featuredFilter = true;
         if (Mod::get()->getSavedValue<bool>("filter-epic")) search->m_epicFilter = true;
@@ -870,7 +807,6 @@ protected:
         glm->getOnlineLevels(search);
     }
 
-    // True if you have any attempts or any percentage saved on this level
     static bool hasProgress(GJGameLevel* lvl) {
         return lvl->getNormalPercent() > 0
             || lvl->m_practicePercent > 0
@@ -882,8 +818,6 @@ protected:
             this->retryOrFail();
             return;
         }
-
-        // Keep only levels you have never completed, played, opened or been given before
         auto seen = Mod::get()->getSavedValue<std::vector<int>>("seen-levels");
         std::vector<GJGameLevel*> fresh;
         for (unsigned int i = 0; i < levels->count(); i++) {
@@ -905,8 +839,6 @@ protected:
 
         std::uniform_int_distribution<size_t> pick(0, fresh.size() - 1);
         m_pendingLevel = fresh[pick(m_rng)];
-
-        // Remember this level so it is never given again
         seen.push_back(m_pendingLevel->m_levelID.value());
         if (seen.size() > 5000) seen.erase(seen.begin());
         Mod::get()->setSavedValue("seen-levels", seen);
@@ -934,7 +866,6 @@ protected:
         m_resultLabel->limitLabelWidth(300.f, 0.5f, 0.2f);
     }
 
-    // Saves the level you opened into the History list
     void addToHistory() {
         if (!m_pendingLevel) return;
         auto ids = Mod::get()->getSavedValue<std::vector<int>>("history-ids");
