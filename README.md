@@ -1,21 +1,34 @@
- DemonRoulette
+Demon Roulette
 
-<img src="logo.png" width="150" alt="the mod's logo" />
+A Geometry Dash mod that picks a random demon for you to play.
 
+Cant decide what to play? Let the roulette decide.
 
-## Getting started
-We recommend heading over to [the getting started section on our docs](https://docs.geode-sdk.org/getting-started/) for useful info on what to do next.
+## Features
 
-## Build instructions
-For more info, see [our docs](https://docs.geode-sdk.org/getting-started/create-mod#build)
-```sh
-# Assuming you have the Geode CLI set up already
-geode build
-```
+- Spin the roulette to get a random demon
+- Open the selected level straight from the popup
+- Reroll if you don't like your result
+- Toggle auto-open
+- Toggle sound effects
+- Toggle screen shake
+- Toggle the white flash effect
 
-# Resources
-* [Geode SDK Documentation](https://docs.geode-sdk.org/)
-* [Geode SDK Source Code](https://github.com/geode-sdk/geode/)
-* [Geode CLI](https://github.com/geode-sdk/cli)
-* [Bindings](https://github.com/geode-sdk/bindings/)
-* [Dev Tools](https://github.com/geode-sdk/DevTools)
+## Supported platforms
+
+- Windows
+- Android
+
+iOS support is not included yet.
+
+## Installation
+
+Install Demon Roulette through the Geode mod browser once it becomes available on the index.
+
+You can also download the `.geode` file from the [Releases](https://github.com/Kyn0ra/Demon-Roulette/releases) page.
+
+## Credits
+
+Made by **Kynora**.
+
+Have fun and good luck with your demons
