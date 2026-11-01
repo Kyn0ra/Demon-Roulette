@@ -1,3 +1,4 @@
+<img width="101" height="101" alt="Screenshot 2026-10-31 220745-modified" src="https://github.com/user-attachments/assets/7552ef11-5c25-42db-9aee-5956228f1cd2" />
 Demon Roulette
 
 A Geometry Dash mod that picks a random demon for you to play.
@@ -29,6 +30,6 @@ You can also download the `.geode` file from the [Releases](https://github.com/K
 
 ## Credits
 
-Made by **Kynora**.
+Made by Kynora.
 
 Have fun and good luck with your demons
