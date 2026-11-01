@@ -1,35 +1,23 @@
 <img width="101" height="101" alt="Screenshot 2026-10-31 220745-modified" src="https://github.com/user-attachments/assets/7552ef11-5c25-42db-9aee-5956228f1cd2" />
-Demon Roulette
+# Demon Roulette
 
-A Geometry Dash mod that picks a random demon for you to play.
+Demon Roulette is a small Geometry Dash mod that chooses a random demon for you.
 
-Cant decide what to play? Let the roulette decide.
+If you dont know what level to play, just spin the wheel and see what you get.
 
-## Features
+### What it does
+- Picks a random demon
+- Lets you open the level
+- Gives you the option to reroll
+- Has settings for sounds, screen shake, white flash and auto open
 
-- Spin the roulette to get a random demon
-- Open the selected level straight from the popup
-- Reroll if you don't like your result
-- Toggle auto-open
-- Toggle sound effects
-- Toggle screen shake
-- Toggle the white flash effect
-
-## Supported platforms
-
+### Platforms
 - Windows
 - Android
+- macOS
+iOS isn't supported yet.
 
-iOS support is not included yet.
-
-## Installation
-
-Install Demon Roulette through the Geode mod browser once it becomes available on the index.
-
-You can also download the `.geode` file from the [Releases](https://github.com/Kyn0ra/Demon-Roulette/releases) page.
-
-## Credits
+### Download
+You can find the latest builds in the [Releases](https://github.com/Kyn0ra/Demon-Roulette/releases) tab.
 
 Made by Kynora.
-
-Have fun and good luck with your demons
