@@ -7,7 +7,7 @@ else()
     set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-project(DemonRoulette VERSION 1.0.0
+project(DemonRoulette VERSION 1.0.0)
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 if (NOT DEFINED ENV{GEODE_SDK})
